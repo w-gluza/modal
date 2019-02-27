@@ -4,32 +4,17 @@ import './App.css';
 import Modal from './components/Modal';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
+  handleClick = event =>
+    document.getElementById('myModal').classList.add('show');
 
-    this.toggleModal = this.toggleModal.bind(this);
-  }
-
-  toggleModal() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
   render() {
     return (
-      <div className="App">
-        <main>
-          <section>
-            <button onClick={this.toggleModal}>Open Modal</button>
-            {this.state.isOpen ? (
-              <Modal toggleModal={this.toggleModal} />
-            ) : null}
-          </section>
-        </main>
-      </div>
+      <main className="main">
+        <button class="button" onClick={this.handleClick}>
+          Open Modal
+        </button>
+        <Modal />
+      </main>
     );
   }
 }

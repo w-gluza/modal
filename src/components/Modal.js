@@ -80,49 +80,43 @@ export default class Modal extends React.Component {
     });
   }
 
+  handleClose = event =>
+    document.getElementById('myModal').classList.remove('show');
   render() {
     return (
-      <div>
-        <div id="myModal" className="modal">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2 style={{ color: this.state.fill }}>
-                Modal Header: <span>{this.state.shape}</span>
-              </h2>
-              <span className="close" onClick={this.props.toggleModal}>
-                &times; Modal Close
-              </span>
-            </div>
-            <div className="shape-list">
-              {this.state.shapes.map((shape, id) => (
-                <button
-                  key={id}
-                  onClick={() => this.setState({ shape: shape })}
-                >
-                  {shape}
-                </button>
-              ))}
-            </div>
-            <div>
-              <canvas
-                id="myCanvas"
-                className="shape-container"
-                width="300px"
-                height="300px"
-              />
-            </div>
+      <div id="myModal" className="modal">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h2 style={{ color: this.state.fill }}>
+              Modal Header: <span>{this.state.shape}</span>
+            </h2>
+            <button onClick={this.handleClose}>&times;</button>
+          </div>
+          <div className="shape-list">
+            {this.state.shapes.map((shape, id) => (
+              <button key={id} onClick={() => this.setState({ shape: shape })}>
+                {shape}
+              </button>
+            ))}
+          </div>
+          <div>
+            <canvas
+              id="myCanvas"
+              className="shape-container"
+              width="300px"
+              height="300px"
+            />
+          </div>
 
-            <div className="color-list">
-              {/* <button onClick={this.clearCanvas}>clear</button> */}
-              {this.state.colors.map((color, id) => (
-                <button
-                  key={id}
-                  className="dot"
-                  onClick={() => this.setState({ fill: color })}
-                  style={{ backgroundColor: color }}
-                />
-              ))}
-            </div>
+          <div className="color-list">
+            {this.state.colors.map((color, id) => (
+              <button
+                key={id}
+                className="dot"
+                onClick={() => this.setState({ fill: color })}
+                style={{ backgroundColor: color }}
+              />
+            ))}
           </div>
         </div>
       </div>
