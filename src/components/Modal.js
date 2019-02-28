@@ -9,7 +9,6 @@ export default class Modal extends React.Component {
       shape: 'circle',
       fill: '#b2dfdb'
     };
-    // this.clearCanvas = this.clearCanvas.bind(this);
   }
 
   componentDidMount() {
@@ -73,50 +72,82 @@ export default class Modal extends React.Component {
     }
   }
 
-  clearCanvas() {
-    this.setState({
-      shape: '',
-      fill: ''
-    });
+  // handleClose = event =>
+  //   document.getElementById('myModal').classList.remove('show');
+
+  handleClose() {
+    document.getElementById('myModal').classList.remove('show');
+    document.getElementById('confirmWraper').classList.add('hide');
+    document.getElementById('modalContent').classList.remove('hide');
+  }
+  handleConfirmation() {
+    document.getElementById('modalContent').classList.add('hide');
+    document.getElementById('confirmWraper').classList.remove('hide');
   }
 
-  handleClose = event =>
-    document.getElementById('myModal').classList.remove('show');
   render() {
     return (
       <div id="myModal" className="modal">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h2 style={{ color: this.state.fill }}>
-              Modal Header: <span>{this.state.shape}</span>
-            </h2>
-            <button onClick={this.handleClose}>&times;</button>
+        <div className="modal-content-wrapper">
+          <div id="confirmWraper" className="hide">
+            <button
+              className="button confirm-button"
+              onClick={this.handleClose}
+            >
+              Confirm
+            </button>
           </div>
-          <div className="shape-list">
-            {this.state.shapes.map((shape, id) => (
-              <button key={id} onClick={() => this.setState({ shape: shape })}>
-                {shape}
+          <div id="modalContent" className="modal-content">
+            <div className="modal-header">
+              <h2 style={{ color: this.state.fill }}>
+                Modal Header: <span>{this.state.shape}</span>
+              </h2>
+              <button className="closeButton" onClick={this.handleClose}>
+                &times;
               </button>
-            ))}
-          </div>
-          <div>
-            <canvas
-              id="myCanvas"
-              className="shape-container"
-              width="300px"
-              height="300px"
-            />
-          </div>
+            </div>
+            <div className="shape-list">
+              {this.state.shapes.map((shape, id) => (
+                <button
+                  className="list-item"
+                  key={id}
+                  onClick={() => this.setState({ shape: shape })}
+                >
+                  {shape}
+                </button>
+              ))}
+            </div>
 
-          <div className="color-list">
-            {this.state.colors.map((color, id) => (
-              <button
-                key={id}
-                className="dot"
-                onClick={() => this.setState({ fill: color })}
-                style={{ backgroundColor: color }}
+            <div>
+              <canvas
+                id="myCanvas"
+                className="shape-container"
+                width="300px"
+                height="300px"
               />
-            ))}
+            </div>
+
+            <div className="color-list">
+              {this.state.colors.map((color, id) => (
+                <button
+                  key={id}
+                  className="dot"
+                  onClick={() => this.setState({ fill: color })}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
+            <footer className="footer">
+              <button
+                className="button button__modified"
+                onClick={this.handleClose}
+              >
+                Skip
+              </button>
+              <button className="button" onClick={this.handleConfirmation}>
+                Next
+              </button>
+            </footer>
           </div>
         </div>
       </div>

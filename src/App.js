@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <main className="main">
-        <button class="button" onClick={this.handleClick}>
+        <button className="button" onClick={this.handleClick}>
           Open Modal
         </button>
         <Modal />
